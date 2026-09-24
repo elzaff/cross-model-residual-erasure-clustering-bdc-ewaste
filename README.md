@@ -121,7 +121,7 @@ didominasi AC, kulkas, dan kompresor, yaitu kategori WEEE 1 yang tidak ada di da
 └── figures/                  gambar hasil (Gambar 1–9)
 ```
 
-Dashboard presentasi: GANTI_URL_REPO_DASHBOARD
+Dashboard presentasi: https://elzaff.github.io/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard/ (kode halaman: https://github.com/elzaff/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard)
 
 ## Reproduksi
 
