@@ -129,6 +129,12 @@ def prep_new(tag): _step("prep_new.py", tag)
 @app.function(gpu="L4", cpu=8, memory=32768, volumes={"/vol": vol}, timeout=3 * 3600, secrets=HF)
 def embed_new(tag): _step("embed_new.py", tag)
 
+@app.function(gpu="L4", cpu=8, memory=32768, volumes={"/vol": vol}, timeout=3 * 3600, secrets=HF)
+def embed_aimv2_new(tag): _step("embed_aimv2_new.py", tag)
+
+@app.function(cpu=16, memory=65536, volumes={"/vol": vol}, timeout=3 * 3600)
+def compare_aimv2_external(): _step("compare_aimv2_external.py")
+
 @app.function(cpu=16, memory=65536, volumes={"/vol": vol}, timeout=3 * 3600)
 def rq_iliev(): _step("rq_iliev.py")
 
@@ -173,6 +179,11 @@ def notest(): _step("rq_notest.py")  # v4 refit without the 188 BDC test images
 
 @app.local_entrypoint()
 def main(stage: str = "extra+analyze", seed_start: int = 8, seed_stop: int = 100):
+    if stage == "aimv2_external":
+        embed_aimv2_new.remote("iliev")
+        embed_aimv2_new.remote("shubha")
+        return
+    if stage == "aimv2_compare_external": return compare_aimv2_external.remote()
     if stage == "scmax100":
         list(scmax_repeat.starmap((start, min(start + 10, seed_stop))
                                  for start in range(seed_start, seed_stop, 10)))

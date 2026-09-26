@@ -51,6 +51,8 @@ terhadap struktur ketetanggaan. Implementasi inti ada di [`code/ewaste_cmre.py`]
 
 ## Hasil utama
 
+Audit lanjutan AIMv2-L tersedia di [`results/modal/aimv2_fusion_report.md`](results/modal/aimv2_fusion_report.md). Fusi empat model mencapai xsrc 0,987 pada BDC, tetapi selisih terhadap v4 pada Iliev (+0,002; IK95% [-0,012; 0,015]) dan Shubha (+0,011; [0,000; 0,028]) belum menunjukkan kenaikan yang konsisten. Karena itu, pipeline final tetap v4. Kode dan CSV audit ada di `code/pipeline/compare_aimv2_*.py` dan `results/modal/aimv2_*.csv`.
+
 **xsrc** (konsistensi lintas sumber) adalah proporsi foto dari sumber kedua yang masuk ke kelompok mayoritas citra produk
 (Kaan) untuk kelas yang sama, dirata-rata per kelas. Nilai 1 berarti pengelompokan tidak terpengaruh sumber foto.
 
