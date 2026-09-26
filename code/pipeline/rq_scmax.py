@@ -1,4 +1,4 @@
-"""Label-free K via SCMax (Zhang et al., AAAI-26; official code in scmax/, MIT) on debiased features (images only).
+"""Label-free K via SCMax (Zhang et al., AAAI-26; official commit 89437a1, MIT) on debiased features (images only).
 The SCMax loop mirrors the authors' demo.py with their default settings (AE 256-d, 200 MSE epochs, 50 back-feature epochs,
 batch 256, lr 3e-4); only the input features and the seeds change. For each feature set and seed we record every
 nearest-neighbour merge level (FINCH-like candidates) with its NNC score, the SCMax pick, and
@@ -47,7 +47,10 @@ def nnc(a, b):  # authors' best_mapping: Hungarian-aligned agreement
     r, c = linear_sum_assignment(C.max() - C); return C[r, c].sum() / len(a)
 
 def scmax(X, seed):
-    torch.manual_seed(seed); np.random.seed(seed); random.seed(seed)
+    # Same seed setup as the authors' demo.py.
+    torch.manual_seed(seed); torch.cuda.manual_seed_all(seed)
+    np.random.seed(seed); random.seed(seed)
+    torch.backends.cudnn.deterministic = True
     ae = AutoEncoder(1, [X.shape[1]], FDIM, DEV); opt = torch.optim.Adam(ae.parameters(), lr=LR); mse = torch.nn.MSELoss()
     Xt = torch.tensor(X, dtype=torch.float32, device=DEV); n = len(X)
     def epochs(E, labels=None, K=None):
@@ -78,28 +81,29 @@ FEATS = {"CMRE(sig)+CMRE(pe)+dino": lambda: fuse(cmre(sig, dino), cmre(pe, dino)
 SEEDS = [int(s) for s in os.environ.get("SCMAX_SEEDS", "3407,0,1").split(",")]  # extra seeds: SCMAX_SEEDS=2,3,...
 FEATS = {k: f for k, f in FEATS.items() if k.startswith(os.environ.get("SCMAX_FEATS", ""))}
 
-RUN_TAG = os.environ.get("SCMAX_RUN_TAG", "")
-LP, RP = f"{OUT}/scmax_levels{RUN_TAG}.csv", f"{OUT}/scmax_results{RUN_TAG}.csv"
-lev_rows = pd.read_csv(LP).to_dict("records") if os.path.exists(LP) else []
-res_rows = pd.read_csv(RP).to_dict("records") if os.path.exists(RP) else []
-done = {(r["feat"], r["seed"]) for r in res_rows}
-for name, fx in FEATS.items():
-    x = fx(); z = reduce(x[main], x, 32); zm = z[main]
-    for seed in SEEDS:
-        if (name, seed) in done: continue
-        levels = scmax(x[main], seed)
-        for L in levels:
-            lev_rows.append(dict(feat=name, seed=seed, K=L["K"], nnc=L["nnc"], sil=silhouette_score(zm, L["labels"]),
-                                 **full_metrics(assign(z, L["labels"]))))
-        best = max(levels, key=lambda L: L["nnc"])
-        ys = SpectralClustering(best["K"], affinity="nearest_neighbors", n_neighbors=15, random_state=0,
-                                assign_labels="cluster_qr").fit_predict(zm)
-        res_rows.append(dict(feat=name, seed=seed, K_levels=str([L["K"] for L in levels]), K_scmax=best["K"], nnc=best["nnc"],
-                             **{f"scmax_{k}": v for k, v in full_metrics(assign(z, best["labels"])).items()},
-                             **{f"hybrid_{k}": v for k, v in full_metrics(assign(z, ys)).items()}))
-        pd.DataFrame(lev_rows).to_csv(LP, index=False); pd.DataFrame(res_rows).to_csv(RP, index=False)
-        r = res_rows[-1]
-        print("SCMAX", name, "seed", seed, "| levels", r["K_levels"], "| K*", r["K_scmax"], "nnc", round(r["nnc"], 3),
-              "| scmax xsrc", round(r["scmax_xsrc_agree"], 3), "ext_obj", round(r["scmax_ext_obj_nmi"], 3),
-              "| hybrid xsrc", round(r["hybrid_xsrc_agree"], 3), "ext_obj", round(r["hybrid_ext_obj_nmi"], 3), flush=True)
-print("SCMAX DONE")
+if __name__ == "__main__":  # guard so scmax() can be imported
+    RUN_TAG = os.environ.get("SCMAX_RUN_TAG", "")
+    LP, RP = f"{OUT}/scmax_levels{RUN_TAG}.csv", f"{OUT}/scmax_results{RUN_TAG}.csv"
+    lev_rows = pd.read_csv(LP).to_dict("records") if os.path.exists(LP) else []
+    res_rows = pd.read_csv(RP).to_dict("records") if os.path.exists(RP) else []
+    done = {(r["feat"], r["seed"]) for r in res_rows}
+    for name, fx in FEATS.items():
+        x = fx(); z = reduce(x[main], x, 32); zm = z[main]
+        for seed in SEEDS:
+            if (name, seed) in done: continue
+            levels = scmax(x[main], seed)
+            for L in levels:
+                lev_rows.append(dict(feat=name, seed=seed, K=L["K"], nnc=L["nnc"], sil=silhouette_score(zm, L["labels"]),
+                                     **full_metrics(assign(z, L["labels"]))))
+            best = max(levels, key=lambda L: L["nnc"])
+            ys = SpectralClustering(best["K"], affinity="nearest_neighbors", n_neighbors=15, random_state=0,
+                                    assign_labels="cluster_qr").fit_predict(zm)
+            res_rows.append(dict(feat=name, seed=seed, K_levels=str([L["K"] for L in levels]), K_scmax=best["K"], nnc=best["nnc"],
+                                 **{f"scmax_{k}": v for k, v in full_metrics(assign(z, best["labels"])).items()},
+                                 **{f"hybrid_{k}": v for k, v in full_metrics(assign(z, ys)).items()}))
+            pd.DataFrame(lev_rows).to_csv(LP, index=False); pd.DataFrame(res_rows).to_csv(RP, index=False)
+            r = res_rows[-1]
+            print("SCMAX", name, "seed", seed, "| levels", r["K_levels"], "| K*", r["K_scmax"], "nnc", round(r["nnc"], 3),
+                  "| scmax xsrc", round(r["scmax_xsrc_agree"], 3), "ext_obj", round(r["scmax_ext_obj_nmi"], 3),
+                  "| hybrid xsrc", round(r["hybrid_xsrc_agree"], 3), "ext_obj", round(r["hybrid_ext_obj_nmi"], 3), flush=True)
+    print("SCMAX DONE")

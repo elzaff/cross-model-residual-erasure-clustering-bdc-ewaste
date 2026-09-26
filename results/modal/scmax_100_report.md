@@ -1,5 +1,7 @@
 # Audit 100 seed SCMax pada fitur CMRE beku
 
+> **Arsip sebelum audit kode 27 September 2026.** Angka terkini ada di [laporan audit ulang](scmax_100_source_audit_report.md). Berkas ini dipertahankan untuk melacak perubahan hasil.
+
 Seed 0–7 berasal dari checkpoint sebelumnya; seed 8–9 dijalankan pada [Modal run 1](https://modal.com/apps/apasijannn/main/ap-ebKIp7sM2zYNWKmllOptcc) dan seed 10–99 pada [Modal run 2](https://modal.com/apps/apasijannn/main/ap-Q7pB7VUVqiuOkNuVZn5v7M). Seluruhnya memakai GPU L4, kode SCMax dan input yang sama.
 
 Seed 0–99; SCMax memilih K tanpa label. Spectral clustering memakai K pilihan tiap seed, fitur PCA-32 yang sama, 15 tetangga, dan random_state=0. Data eksternal dipetakan ke centroid partisi utama. Ini menguji seed SCMax pada data tetap, bukan bootstrap data atau 100 set uji independen.

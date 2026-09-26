@@ -114,6 +114,22 @@ def scmax_repeat(start: int, stop: int):
                       SCMAX_RUN_TAG=f"_repeat_{start}_{stop}")
     _step("rq_scmax.py")
 
+@app.function(gpu="L4", cpu=8, memory=32768, volumes={"/vol": vol}, timeout=4 * 3600)
+def scmax_source_audit(start: int, stop: int):
+    os.environ.update(SCMAX_SEEDS=",".join(map(str, range(start, stop))), SCMAX_FEATS="CMRE",
+                      SCMAX_RUN_TAG=f"_source_audit_{start}_{stop}")
+    _step("rq_scmax.py")
+
+@app.function(cpu=8, memory=32768, volumes={"/vol": vol}, timeout=600)
+def source_audit_export_features():
+    import hashlib, sys, numpy as np
+    sys.path.insert(0, "/root/exp")
+    from rq_scmax import FEATS, main
+    x = FEATS["CMRE(sig)+CMRE(pe)+dino"]()[main].astype(np.float32)
+    np.save("/vol/out/scmax_cmre_main_source_audit.npy", x)
+    vol.commit()
+    return hashlib.sha256(x.tobytes()).hexdigest(), x.shape
+
 @app.function(cpu=8, memory=32768, volumes={"/vol": vol}, timeout=2 * 3600)
 def final4():  # v3 features, K = median SCMax K over 9 seeds (16); v3 outputs untouched
     import json, shutil
@@ -179,6 +195,13 @@ def notest(): _step("rq_notest.py")  # v4 refit without the 188 BDC test images
 
 @app.local_entrypoint()
 def main(stage: str = "extra+analyze", seed_start: int = 8, seed_stop: int = 100):
+    if stage == "source_audit_export_features":
+        print(source_audit_export_features.remote())
+        return
+    if stage == "scmax_source_audit":
+        list(scmax_source_audit.starmap((start, min(start + 10, seed_stop))
+                                       for start in range(seed_start, seed_stop, 10)))
+        return
     if stage == "aimv2_external":
         embed_aimv2_new.remote("iliev")
         embed_aimv2_new.remote("shubha")

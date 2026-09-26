@@ -193,7 +193,7 @@ Model: [SigLIP2-So400m](https://huggingface.co/google/siglip2-so400m-patch16-naf
 
 ## Audit sensitivitas SCMax dengan 100 seed
 
-SCMax dijalankan 100 kali pada fitur CMRE yang sama; hanya seed inisialisasi yang berubah. K terpilih 13-21 (median 16; modus 17), dan K=16 terpilih 20/100 kali. xsrc hybrid rata-rata 0.923 (SD 0.098; median 0.975), NMI objek eksternal 0.854 (SD 0.022), dan ARI antarpasangan partisi 0.861 (SD 0.110; 4,950 pasangan). xsrc turun sampai 0.596 pada run yang memilih K=20-21. Ini mengukur sensitivitas seed pada data tetap, bukan 100 sampel uji independen. Rincian: [laporan](results/modal/scmax_100_report.md) dan [hasil CSV](results/modal/scmax_results_100.csv).
+Audit ulang dengan pengaturan seed yang sama seperti kode penulis menjalankan SCMax 100 kali pada fitur CMRE yang tetap. K terpilih 13-21 (median **16,5**, modus 17), dan K=16 terpilih 20/100 kali. xsrc hibrida SCMax untuk K lalu Spectral rata-rata **0,919** (SD 0,103; median 0,975), sedangkan xsrc partisi SCMax sendiri 0,731 (SD 0,127). NMI objek eksternal hibrida 0,853 (SD 0,024), dan ARI antarpasangan partisi 0,860 (SD 0,110; 4.950 pasangan). Ini mengukur sensitivitas seed pada data tetap, bukan 100 sampel uji independen. K=16 tetap merupakan median sembilan seed yang dipakai untuk memilih partisi final. Rincian: [laporan audit ulang](results/modal/scmax_100_source_audit_report.md) dan [hasil CSV](results/modal/scmax_results_100_source_audit.csv).
 
 Hierarki agglomerative dibuat post hoc di atas partisi final 16 kelompok. Level K=16, 13, 12, dan 8 beserta evaluasi dan merge tersedia di [results/modal/hierarchy/](results/modal/hierarchy/).
 
@@ -203,7 +203,7 @@ Hierarki agglomerative dibuat post hoc di atas partisi final 16 kelompok. Level 
    dan Shubha masih kecil (300 crop).
 2. CMRE setara INLP, bukan lebih unggul. Manfaatnya bersyarat: tidak ada kenaikan pada data yang tidak bias (Office-Home),
    dan acuannya harus model *self-supervised* berskala besar.
-3. Audit 100 seed memilih K=13-21 (median 16; modus 17); K=16 hanya terpilih pada 20/100 run.
+3. Audit ulang 100 seed memilih K=13-21 (median 16,5; modus 17); K=16 hanya terpilih pada 20/100 run. Pada GPU lain, seed yang sama dapat memilih K berbeda.
 4. Deteksi OOD masih memakai ambang global, sehingga 13% foto objek berlatar beragam dari kelas yang dikenal ikut ditandai.
 5. Belum ada foto e-waste yang diambil langsung di Indonesia. Pemetaan kelompok ke kategori WEEE dilakukan penulis
    setelah melihat galeri.
