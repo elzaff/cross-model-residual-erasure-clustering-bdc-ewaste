@@ -1,0 +1,16 @@
+step,k_after,node,leaf_clusters,leaf_names,n_main,cosine_distance,bootstrap_clade_support,single_complete_agree
+1,15,16,"6,8",Mesin cuci atas + Mesin cuci depan,307,0.3900878807572916,1.0,True
+2,14,17,"1,4",Baterai laptop + Baterai ponsel/kamera,206,0.41295820391226956,1.0,True
+3,13,18,"2,5",Turntable + Pemutar CD/radio,264,0.5794751025416576,1.0,True
+4,12,19,"3,7",TV CRT + TV layar datar,437,0.6605356036301779,1.0,True
+5,11,20,"0,1,4",Aki + Baterai laptop + Baterai ponsel/kamera,321,0.7713584336569034,1.0,True
+6,10,21,"10,13",Keyboard + Mouse,611,0.8011370461205882,1.0,True
+7,9,22,"9,14",Laptop + Ponsel,643,0.8081417835915128,1.0,True
+8,8,23,"6,8,11",Mesin cuci atas + Mesin cuci depan + Microwave,582,0.9053470444094495,1.0,True
+9,7,24,"2,5,12",Turntable + Pemutar CD/radio + Printer,558,0.9617662625905314,0.995,False
+10,6,25,"0,1,4,15",Aki + Baterai laptop + Baterai ponsel/kamera + PCB/campuran,961,0.9976814494001989,0.87,False
+11,5,26,"2,5,6,8,11,12",Turntable + Pemutar CD/radio + Mesin cuci atas + Mesin cuci depan + Microwave + Printer,1140,1.0049008778952429,0.91,False
+12,4,27,"3,7,9,14",TV CRT + TV layar datar + Laptop + Ponsel,1080,1.047428380330426,0.605,False
+13,3,28,"0,1,3,4,7,9,14,15",Aki + Baterai laptop + TV CRT + Baterai ponsel/kamera + TV layar datar + Laptop + Ponsel + PCB/campuran,2041,1.0711484142008945,0.55,False
+14,2,29,"0,1,2,3,4,5,6,7,8,9,11,12,14,15",Aki + Baterai laptop + Turntable + TV CRT + Baterai ponsel/kamera + Pemutar CD/radio + Mesin cuci atas + TV layar datar + Mesin cuci depan + Laptop + Microwave + Printer + Ponsel + PCB/campuran,3181,1.0968608633453025,0.33,False
+15,1,30,"0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15",Aki + Baterai laptop + Turntable + TV CRT + Baterai ponsel/kamera + Pemutar CD/radio + Mesin cuci atas + TV layar datar + Mesin cuci depan + Laptop + Keyboard + Microwave + Printer + Mouse + Ponsel + PCB/campuran,3792,1.1100079907793676,1.0,True

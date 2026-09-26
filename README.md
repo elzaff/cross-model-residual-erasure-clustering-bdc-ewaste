@@ -3,7 +3,7 @@
 **Cross-Model Residual Erasure (CMRE) + SCMax + Spectral Clustering + deteksi OOD kNN**
 Karya ilmiah babak semifinal **Big Data Challenge (BDC) Satria Data 2026**.
 
-Foto e-waste datang dari sumber yang sangat beragam: katalog daring berlatar putih, kamera ponsel, sampai foto lapangan di
+Foto e-waste datang dari sumber yang sangat beragam: citra produk berlatar putih, foto objek berlatar beragam, sampai foto lapangan di
 pengepul. Kami menemukan bahwa model fondasi visi-bahasa (SigLIP2, PE-Core, CLIP) cenderung mengelompokkan foto menurut
 **cara foto diambil**, bukan menurut **bendanya**. Repositori ini berisi pipeline clustering tanpa label yang mengurangi bias
 sumber foto tersebut, beserta semua hasil, gambar, dashboard, dan kode untuk mereproduksinya.
@@ -51,17 +51,17 @@ terhadap struktur ketetanggaan. Implementasi inti ada di [`code/ewaste_cmre.py`]
 
 ## Hasil utama
 
-**xsrc** (konsistensi lintas sumber) adalah proporsi foto dari sumber kedua yang masuk ke kelompok mayoritas foto katalog
+**xsrc** (konsistensi lintas sumber) adalah proporsi foto dari sumber kedua yang masuk ke kelompok mayoritas citra produk
 (Kaan) untuk kelas yang sama, dirata-rata per kelas. Nilai 1 berarti pengelompokan tidak terpengaruh sumber foto.
 
 | Set data | Peran | Fusi mentah | DINOv3-H+ saja | INLP ×3 (butuh proksi) | **CMRE (usulan)** |
 |---|---|---|---|---|---|
-| BDC, 5 kelas (Kaan vs foto ponsel Bangladesh) | pengembangan | 0,524 | 0,758 | 0,975 | **0,975** [0,958–0,989] |
+| BDC, 5 kelas (citra produk vs foto objek berlatar beragam) | pengembangan | 0,524 | 0,758 | 0,975 | **0,975** [0,958–0,989] |
 | Iliev, 10 kelas, 1.751 crop | uji terkunci (xsrc) | 0,803 | 0,755 | 0,882 | **0,885** [0,864–0,908] |
 | Shubha, 3 kelas dikenal, 300 crop | uji segar (konfirmasi awal) | 0,356 | 0,889 | 0,972 | **0,956** [0,924–0,983] |
 | Office-Home, 20 kelas | domain lain (tidak bias) | 0,865 | 0,761 | 0,870 | 0,864 |
 
-- Purity BDC **0,992**, stabilitas antar-seed (ARI) **1,00**, NMI objek 0,859.
+- Purity BDC **0,992**, ARI **1,00** antara partisi final K=16 dan pengulangan yang memilih K=16, NMI objek 0,859.
 - **CMRE setara INLP tanpa merancang proksi gaya apa pun.** Uji bootstrap berpasangan (2.000 ulangan) menunjukkan selisih
   terhadap INLP tidak signifikan, sedangkan selisih terhadap fusi mentah dan DINOv3 saja signifikan (p < 0,001) pada ketiga set.
 - Pada Office-Home, yang fiturnya memang tidak bias, CMRE tidak menambah kinerja tetapi juga tidak merusak.
@@ -151,7 +151,7 @@ python code/ewaste_cmre.py      # uji mandiri implementasi inti
 |---|---|
 | `--stage all` | ekstraksi fitur 17 representasi (GPU) + audit bias sumber |
 | `--stage final2` | pembanding adil (INLP, LEACE, fusi mentah), kontrol data MetaCLIP vs Web-DINO |
-| `--stage scmax` lalu `--stage scmax_seeds` | SCMax 9 seed → median K = 16 |
+| --stage scmax lalu --stage scmax_seeds | audit awal 9 seed; median K = 16 |
 | `--stage final4` | partisi final → `/out/final_v4` |
 | `--stage fix`, `--stage fix2` | baseline, probe, sapuan r/K/tetangga, OOD kNN, Jaccard |
 | `--stage iliev`, `--stage shubha`, `--stage officehome` | validasi eksternal (protokol dikunci sebelum unduh) |
@@ -172,7 +172,7 @@ Tidak ada data mentah yang didistribusikan ulang di repositori ini. Jumlah citra
 |---|---|---|---|---|
 | BDC Satria Data 2026 | data clustering | 3.792 | aturan lomba | panitia BDC |
 | Kaan, Waste Classification | acuan xsrc (katalog) | 1.794 | CDLA-Permissive-1.0 | [Kaggle](https://www.kaggle.com/datasets/kaanerkez/waste-classfication-dataset) |
-| Custom Bangladeshi E-Waste | target xsrc (foto ponsel) | 480 | CC BY 4.0 | [Mendeley](https://data.mendeley.com/datasets/77383kmdnw/1) |
+| Custom Bangladeshi E-Waste | target xsrc (foto objek berlatar beragam) | 480 | CC BY 4.0 | [Mendeley](https://data.mendeley.com/datasets/77383kmdnw/1) |
 | Karan, Garbage Classification (baterai) | evaluasi objek | 499 | Apache 2.0 | [Kaggle](https://www.kaggle.com/datasets/karansolanki01/garbage-classification) |
 | GIZ E-Waste Database | uji OOD foto lapangan | 1.000 | CC BY 4.0 | [Hugging Face](https://huggingface.co/datasets/GIZ/E-Waste-Database) |
 | Iliev, E-Waste Dataset (Roboflow v44) | validasi terkunci | 1.751 crop, 69 kelas | CC BY 4.0 | [Roboflow](https://universe.roboflow.com/electronic-waste-detection/e-waste-dataset-r0ojc) |
@@ -191,14 +191,20 @@ Model: [SigLIP2-So400m](https://huggingface.co/google/siglip2-so400m-patch16-naf
   tersebut memberi hasil yang sama (xsrc 0,975).
 - Protokol Iliev dan Shubha (pemetaan kelas dan metrik) dikunci sebelum data diunduh.
 
+## Audit sensitivitas SCMax dengan 100 seed
+
+SCMax dijalankan 100 kali pada fitur CMRE yang sama; hanya seed inisialisasi yang berubah. K terpilih 13-21 (median 16; modus 17), dan K=16 terpilih 20/100 kali. xsrc hybrid rata-rata 0.923 (SD 0.098; median 0.975), NMI objek eksternal 0.854 (SD 0.022), dan ARI antarpasangan partisi 0.861 (SD 0.110; 4,950 pasangan). xsrc turun sampai 0.596 pada run yang memilih K=20-21. Ini mengukur sensitivitas seed pada data tetap, bukan 100 sampel uji independen. Rincian: [laporan](results/modal/scmax_100_report.md) dan [hasil CSV](results/modal/scmax_results_100.csv).
+
+Hierarki agglomerative dibuat post hoc di atas partisi final 16 kelompok. Level K=16, 13, 12, dan 8 beserta evaluasi dan merge tersedia di [results/modal/hierarchy/](results/modal/hierarchy/).
+
 ## Keterbatasan
 
 1. BDC adalah set pengembangan, sehingga angka BDC bersifat optimistis. Bukti generalisasi berasal dari Iliev dan Shubha,
    dan Shubha masih kecil (300 crop).
 2. CMRE setara INLP, bukan lebih unggul. Manfaatnya bersyarat: tidak ada kenaikan pada data yang tidak bias (Office-Home),
    dan acuannya harus model *self-supervised* berskala besar.
-3. SCMax memilih K antara 13 dan 19 antar-seed; K = 16 adalah median, dan K = 19 memberi xsrc 0,794.
-4. Deteksi OOD masih memakai ambang global, sehingga 13% foto ponsel dari kelas yang dikenal ikut ditandai.
+3. Audit 100 seed memilih K=13-21 (median 16; modus 17); K=16 hanya terpilih pada 20/100 run.
+4. Deteksi OOD masih memakai ambang global, sehingga 13% foto objek berlatar beragam dari kelas yang dikenal ikut ditandai.
 5. Belum ada foto e-waste yang diambil langsung di Indonesia. Pemetaan kelompok ke kategori WEEE dilakukan penulis
    setelah melihat galeri.
 

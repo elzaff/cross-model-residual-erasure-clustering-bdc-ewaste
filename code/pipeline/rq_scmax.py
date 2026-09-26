@@ -78,7 +78,8 @@ FEATS = {"CMRE(sig)+CMRE(pe)+dino": lambda: fuse(cmre(sig, dino), cmre(pe, dino)
 SEEDS = [int(s) for s in os.environ.get("SCMAX_SEEDS", "3407,0,1").split(",")]  # extra seeds: SCMAX_SEEDS=2,3,...
 FEATS = {k: f for k, f in FEATS.items() if k.startswith(os.environ.get("SCMAX_FEATS", ""))}
 
-LP, RP = f"{OUT}/scmax_levels.csv", f"{OUT}/scmax_results.csv"
+RUN_TAG = os.environ.get("SCMAX_RUN_TAG", "")
+LP, RP = f"{OUT}/scmax_levels{RUN_TAG}.csv", f"{OUT}/scmax_results{RUN_TAG}.csv"
 lev_rows = pd.read_csv(LP).to_dict("records") if os.path.exists(LP) else []
 res_rows = pd.read_csv(RP).to_dict("records") if os.path.exists(RP) else []
 done = {(r["feat"], r["seed"]) for r in res_rows}
