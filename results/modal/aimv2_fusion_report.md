@@ -4,7 +4,7 @@
 
 Embedding AIMv2-L asli dan horizontal flip diunduh dari volume Modal `bdc-max`. Kedua matriks berukuran 7.565 × 1.024 dan memakai manifest yang identik dengan embedding v4. Embedding AIMv2 untuk Iliev (1.771 baris termasuk kontrol) dan Shubha (380 baris termasuk kontrol) diekstrak dengan model, normalisasi, dan resolusi masukan yang sama seperti audit awal. Pemeriksaan cosine pada citra kontrol mensyaratkan nilai minimum 0,98 sebelum evaluasi dilanjutkan.
 
-Perbandingan BDC memakai 3.792 citra `main` untuk fitting PCA-32 dan Spectral clustering (`K=16`, graf 15 tetangga, seed 0–2). Citra lain diproyeksikan dan diberi kelompok dari centroid terdekat. AIMv2 dibiarkan mentah karena CMRE pada AIMv2 sebelumnya menurunkan `xsrc`. SigLIP2 dan PE-Core diuji dalam bentuk mentah serta setelah CMRE dengan DINOv3-H+ sebagai acuan. Tiap embedding dinormalisasi L2 sebelum fusi konkatenasi.
+Perbandingan BDC memakai 3.792 citra `main` untuk fitting PCA-32 dan Spectral clustering (`K=16`, graf 15 tetangga, seed 0–2). Citra lain diproyeksikan dan diberi kelompok dari centroid terdekat. AIMv2 memakai checkpoint `apple/aimv2-large-patch14-224` dan dibiarkan mentah agar ablasi mengukur kontribusi encoder tambahan tanpa proyeksi baru. SigLIP2 dan PE-Core diuji dalam bentuk mentah serta setelah CMRE dengan DINOv3-H+ sebagai acuan. Tiap embedding dinormalisasi L2 sebelum fusi konkatenasi.
 
 ## Hasil pada BDC
 
@@ -19,7 +19,15 @@ Perbandingan BDC memakai 3.792 citra `main` untuk fitting PCA-32 dan Spectral cl
 | AIM + CMRE(PE) + DINO | 0,965 | 0,856 | 0,992 | 0,983 |
 | **AIM + CMRE(Sig) + CMRE(PE) + DINO** | **0,987** | **0,865** | **0,994** | **0,984** |
 
-Semua partisi memiliki ARI antarseed 1,00 pada `K=16`. Hasil v4 yang dihitung ulang secara lokal (`xsrc=0,970`) berbeda sedikit dari artefak final tersimpan (`0,975`); tabel ini memakai perhitungan lokal yang sama untuk seluruh kandidat. Selisih tersebut belum diisolasi penyebabnya.
+Semua partisi memiliki ARI antarseed 1,00 pada `K=16`. Hasil v4 yang dihitung ulang secara lokal (`xsrc=0,970`) berbeda sedikit dari artefak final tersimpan (`0,975`); tabel ini memakai perhitungan lokal yang sama untuk seluruh kandidat.
+
+## Audit reproduksi dan sumber galat
+
+Penghitungan ulang v4 memberi xsrc BDC 0,970011, dibanding 0,975411 pada artefak final (selisih −0,005400). Setelah label cluster disejajarkan, **seluruh 3.792 citra utama memperoleh partisi yang sama** (ARI 1,000). Dari 3.773 citra di luar data utama, hanya enam penempatan centroid berubah: empat citra Bangladesh, satu Kaan, dan satu GIZ. ARI pada seluruh 7.565 citra 0,9979. Embedding PCA tersimpan mengembalikan penempatan arsip secara tepat. Pada sampel 512 citra, cosine berpasangan antara fitur PCA tersimpan dan hasil hitung ulang berkorelasi 0,9998, dengan beda absolut rerata 0,0021. Jadi selisih xsrc berasal dari sedikit perubahan penempatan citra luar saat fitur dihitung ulang; penyebab teknis perubahan fitur tersebut belum terisolasi.
+
+Metadata konfigurasi lama menulis `r_siglip2 = r_pecore = 65`. Nilai itu adalah indeks ambang 50% varians setelah `PCA(64)`, sedangkan `components_[:65]` hanya berisi **64 arah**. Proyeksi yang benar-benar diterapkan memakai 64 arah; metadata diberi `effective_r_* = 64` tanpa mengubah catatan indeks lama.
+
+Audit 100 seed SCMax pada v4 mengubah seed dengan data dan embedding tetap: K = 13–21; rerata xsrc 0,923 ± 0,098, rentang 0,596–0,988; ARI antarpasangan partisi 0,861 ± 0,110. Pada K = 16 yang dibekukan, seed tambahan Spectral menghasilkan ARI 1,00. Tiga seed kandidat AIMv2 juga memberi ARI 1,00 pada K = 16. Angka-angka ini mengukur variasi inisialisasi dan pilihan K; **bukan 100 pengulangan penuh** atas ekstraksi, CMRE, PCA, seleksi model, serta sampel baru. Bootstrap berpasangan 2.000 kali di Iliev/Shubha mengambil ulang citra evaluasi per kelas dengan pipeline tetap, sehingga intervalnya juga tidak mencakup variasi pembentukan representasi.
 
 ## Evaluasi eksternal kandidat terbaik
 
