@@ -111,7 +111,6 @@ didominasi AC, kulkas, dan kompresor, yaitu kategori WEEE 1 yang tidak ada di da
 | Aturan pemilihan acuan tanpa label (R² ridge) | Dua acuan teratas (DINOv3-7B, DINOv3-H+) = dua xsrc terbaik (0,983; 0,975); acuan berlabel gagal (0,384) |
 | Sensitivitas r (jumlah arah dihapus) | 0,97–0,99 untuk r = 16–64; turun di luar rentang itu (r = 4: 0,449; r = 128: 0,821) |
 | Sensitivitas α ridge | 0,975–0,983 untuk α = 0,01–1; turun pada α ≥ 10 |
-| Versi cepat tanpa PE-Core-G | ~20 citra/detik di GPU L4 (6× lebih cepat), xsrc 0,951 / 0,860 / 0,922 |
 | Waktu setelah ekstraksi fitur | sekitar 1 detik CPU untuk 3.792 citra |
 
 ## Struktur repositori
