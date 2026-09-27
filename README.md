@@ -99,7 +99,6 @@ didominasi AC, kulkas, dan kompresor, yaitu kategori WEEE 1 yang tidak ada di da
 - 15 dari 16 kelompok berisi ≥ 90% satu label BDC.
 - Kelompok **laptop (C9)** tidak tercantum pada label panitia (berkasnya berlabel "keyboard"). Temuan ini tervalidasi di Iliev:
   96,7% foto laptop masuk ke C9.
-- Tingkat kasar K = 13 dipecah menjadi K = 16: 14 dari 16 kelompok mewarisi ≥ 96% citranya dari satu induk.
 - Uji permutasi WEEE: kategori EU-6 crop Iliev yang dikenali cocok dengan kategori grup kelompoknya pada 79% kasus,
   dibandingkan 19% untuk penggabungan acak (p < 0,001).
 
@@ -124,7 +123,7 @@ didominasi AC, kulkas, dan kompresor, yaitu kategori WEEE 1 yang tidak ada di da
 │   └── pipeline/             seluruh eksperimen (Modal): ekstraksi fitur, audit, pembanding, SCMax, validasi
 ├── data/build_manifest.py    menyusun daftar citra dari data mentah (data mentah tidak disertakan)
 ├── results/modal/            data minimal untuk reproduce.py: fitur final z_final_v4.npy, keanggotaan kelompok
-└── figures/                  gambar hasil (Gambar 1–9)
+└── figures/                  gambar yang dipakai di paper
 ```
 
 Dashboard presentasi: https://elzaff.github.io/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard/ (kode halaman: https://github.com/elzaff/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard)
@@ -200,8 +199,6 @@ Model: [SigLIP2-So400m](https://huggingface.co/google/siglip2-so400m-patch16-naf
 ## Audit sensitivitas SCMax dengan 100 seed
 
 Audit ulang dengan pengaturan seed yang sama seperti kode penulis menjalankan SCMax 100 kali pada fitur CMRE yang tetap. K terpilih 13-21 (median **16,5**, modus 17), dan K=16 terpilih 20/100 kali. xsrc hibrida SCMax untuk K lalu Spectral rata-rata **0,919** (SD 0,103; median 0,975), sedangkan xsrc partisi SCMax sendiri 0,731 (SD 0,127). NMI objek eksternal hibrida 0,853 (SD 0,024), dan ARI antarpasangan partisi 0,860 (SD 0,110; 4.950 pasangan). Ini mengukur sensitivitas seed pada data tetap, bukan 100 sampel uji independen. K=16 tetap merupakan median sembilan seed yang dipakai untuk memilih partisi final. Rincian: [laporan audit ulang](results/modal/scmax_100_source_audit_report.md) dan [hasil CSV](results/modal/scmax_results_100_source_audit.csv).
-
-Hierarki agglomerative dibuat post hoc di atas partisi final 16 kelompok. Level K=16, 13, 12, dan 8 beserta evaluasi dan merge tersedia di [results/modal/hierarchy/](results/modal/hierarchy/).
 
 ## Keterbatasan
 
