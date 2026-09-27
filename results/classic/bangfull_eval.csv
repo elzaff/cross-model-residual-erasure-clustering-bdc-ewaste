@@ -1,0 +1,13 @@
+method,subset,n,top1_micro,top1_macro,top3,mrr,auroc,auprc
+v4 (CMRE),710 (setara BDC12),710,0.9887,0.9904,1.0,0.9937,,
+v4 (CMRE),449 (dedup kita),449,0.9889,0.9915,1.0,0.9941,,
+v4 (CMRE),OOD 1443 vs 710 [kNN k=10],2153,,,,,0.9518,0.9702
+v4 (CMRE),OOD 1443 vs 710 [jarak centroid],2153,,,,,0.8714,0.9031
+fusi mentah,710 (setara BDC12),710,0.9155,0.9193,0.9944,0.9521,,
+fusi mentah,449 (dedup kita),449,0.9176,0.9187,0.9933,0.9545,,
+fusi mentah,OOD 1443 vs 710 [kNN k=10],2153,,,,,0.8999,0.9102
+fusi mentah,OOD 1443 vs 710 [jarak centroid],2153,,,,,0.9352,0.9518
+DINOv3 saja,710 (setara BDC12),710,0.9493,0.9539,0.9901,0.9711,,
+DINOv3 saja,449 (dedup kita),449,0.9465,0.952,0.9911,0.9703,,
+DINOv3 saja,OOD 1443 vs 710 [kNN k=10],2153,,,,,0.9156,0.9337
+DINOv3 saja,OOD 1443 vs 710 [jarak centroid],2153,,,,,0.8772,0.8932

@@ -1,0 +1,118 @@
+method,set,cls,precision,recall,f1-score,support
+v4 (CMRE -> Spectral),BDC-train (in-sample),battery,0.9685,1.0,0.984,215.0
+v4 (CMRE -> Spectral),BDC-train (in-sample),keyboard,1.0,0.9825,0.9912,229.0
+v4 (CMRE -> Spectral),BDC-train (in-sample),microwave,1.0,0.9882,0.9941,255.0
+v4 (CMRE -> Spectral),BDC-train (in-sample),mobile,0.9931,0.9931,0.9931,145.0
+v4 (CMRE -> Spectral),BDC-train (in-sample),mouse,1.0,0.995,0.9975,200.0
+v4 (CMRE -> Spectral),BDC-train (in-sample),pcb,0.9908,0.9863,0.9886,219.0
+v4 (CMRE -> Spectral),BDC-train (in-sample),player,0.9874,0.9874,0.9874,239.0
+v4 (CMRE -> Spectral),BDC-train (in-sample),printer,0.9964,1.0,0.9982,275.0
+v4 (CMRE -> Spectral),BDC-train (in-sample),television,0.9922,1.0,0.9961,254.0
+v4 (CMRE -> Spectral),BDC-train (in-sample),washing_machine,1.0,0.9966,0.9983,298.0
+v4 (CMRE -> Spectral),Kaan,battery,0.9756,1.0,0.9877,200.0
+v4 (CMRE -> Spectral),Kaan,keyboard,0.9895,1.0,0.9947,189.0
+v4 (CMRE -> Spectral),Kaan,microwave,1.0,0.9891,0.9945,183.0
+v4 (CMRE -> Spectral),Kaan,mobile,1.0,0.9942,0.9971,171.0
+v4 (CMRE -> Spectral),Kaan,mouse,1.0,1.0,1.0,177.0
+v4 (CMRE -> Spectral),Kaan,pcb,1.0,0.9837,0.9918,184.0
+v4 (CMRE -> Spectral),Kaan,player,0.9838,1.0,0.9918,182.0
+v4 (CMRE -> Spectral),Kaan,printer,1.0,1.0,1.0,166.0
+v4 (CMRE -> Spectral),Kaan,television,0.9939,0.982,0.988,167.0
+v4 (CMRE -> Spectral),Kaan,washing_machine,1.0,0.9886,0.9943,175.0
+v4 (CMRE -> Spectral),Bangladesh,battery,0.9457,1.0,0.9721,87.0
+v4 (CMRE -> Spectral),Bangladesh,keyboard,1.0,1.0,1.0,79.0
+v4 (CMRE -> Spectral),Bangladesh,mobile,1.0,0.9808,0.9903,104.0
+v4 (CMRE -> Spectral),Bangladesh,mouse,1.0,1.0,1.0,50.0
+v4 (CMRE -> Spectral),Bangladesh,pcb,1.0,0.9767,0.9882,129.0
+v4 (CMRE -> Spectral),Karan,battery,1.0,1.0,1.0,499.0
+v4 (CMRE -> Spectral),Iliev,battery,0.8824,1.0,0.9375,30.0
+v4 (CMRE -> Spectral),Iliev,keyboard,1.0,1.0,1.0,30.0
+v4 (CMRE -> Spectral),Iliev,microwave,1.0,1.0,1.0,30.0
+v4 (CMRE -> Spectral),Iliev,mobile,0.7792,1.0,0.8759,60.0
+v4 (CMRE -> Spectral),Iliev,mouse,1.0,1.0,1.0,30.0
+v4 (CMRE -> Spectral),Iliev,pcb,1.0,1.0,1.0,30.0
+v4 (CMRE -> Spectral),Iliev,player,1.0,0.3,0.4615,30.0
+v4 (CMRE -> Spectral),Iliev,printer,1.0,1.0,1.0,15.0
+v4 (CMRE -> Spectral),Iliev,television,1.0,1.0,1.0,60.0
+v4 (CMRE -> Spectral),Iliev,washing_machine,1.0,1.0,1.0,30.0
+v4 (CMRE -> Spectral),Shubha,keyboard,1.0,1.0,1.0,60.0
+v4 (CMRE -> Spectral),Shubha,mobile,1.0,0.9833,0.9916,60.0
+v4 (CMRE -> Spectral),Shubha,mouse,1.0,1.0,1.0,60.0
+fusi mentah -> Spectral,BDC-train (in-sample),battery,0.9908,1.0,0.9954,215.0
+fusi mentah -> Spectral,BDC-train (in-sample),keyboard,0.987,0.9956,0.9913,229.0
+fusi mentah -> Spectral,BDC-train (in-sample),microwave,0.9921,0.9882,0.9902,255.0
+fusi mentah -> Spectral,BDC-train (in-sample),mobile,0.9932,1.0,0.9966,145.0
+fusi mentah -> Spectral,BDC-train (in-sample),mouse,0.995,0.995,0.995,200.0
+fusi mentah -> Spectral,BDC-train (in-sample),pcb,1.0,0.9954,0.9977,219.0
+fusi mentah -> Spectral,BDC-train (in-sample),player,0.9958,0.9916,0.9937,239.0
+fusi mentah -> Spectral,BDC-train (in-sample),printer,1.0,1.0,1.0,275.0
+fusi mentah -> Spectral,BDC-train (in-sample),television,0.9922,1.0,0.9961,254.0
+fusi mentah -> Spectral,BDC-train (in-sample),washing_machine,1.0,0.9866,0.9932,298.0
+fusi mentah -> Spectral,Kaan,battery,0.995,1.0,0.9975,200.0
+fusi mentah -> Spectral,Kaan,keyboard,0.9785,0.963,0.9707,189.0
+fusi mentah -> Spectral,Kaan,microwave,1.0,0.9891,0.9945,183.0
+fusi mentah -> Spectral,Kaan,mobile,1.0,1.0,1.0,171.0
+fusi mentah -> Spectral,Kaan,mouse,1.0,0.9718,0.9857,177.0
+fusi mentah -> Spectral,Kaan,pcb,1.0,1.0,1.0,184.0
+fusi mentah -> Spectral,Kaan,player,1.0,1.0,1.0,182.0
+fusi mentah -> Spectral,Kaan,printer,1.0,1.0,1.0,166.0
+fusi mentah -> Spectral,Kaan,television,0.9881,0.994,0.991,167.0
+fusi mentah -> Spectral,Kaan,washing_machine,1.0,0.9943,0.9971,175.0
+fusi mentah -> Spectral,Bangladesh,battery,1.0,0.6897,0.8163,87.0
+fusi mentah -> Spectral,Bangladesh,keyboard,1.0,0.9114,0.9536,79.0
+fusi mentah -> Spectral,Bangladesh,mobile,0.7899,0.9038,0.843,104.0
+fusi mentah -> Spectral,Bangladesh,mouse,0.0,0.0,0.0,50.0
+fusi mentah -> Spectral,Bangladesh,pcb,0.9149,1.0,0.9556,129.0
+fusi mentah -> Spectral,Karan,battery,1.0,1.0,1.0,499.0
+fusi mentah -> Spectral,Iliev,battery,0.8571,1.0,0.9231,30.0
+fusi mentah -> Spectral,Iliev,keyboard,1.0,1.0,1.0,30.0
+fusi mentah -> Spectral,Iliev,microwave,1.0,1.0,1.0,30.0
+fusi mentah -> Spectral,Iliev,mobile,0.8194,0.9833,0.8939,60.0
+fusi mentah -> Spectral,Iliev,mouse,1.0,0.6333,0.7755,30.0
+fusi mentah -> Spectral,Iliev,pcb,1.0,1.0,1.0,30.0
+fusi mentah -> Spectral,Iliev,player,1.0,0.4333,0.6047,30.0
+fusi mentah -> Spectral,Iliev,printer,1.0,1.0,1.0,15.0
+fusi mentah -> Spectral,Iliev,television,1.0,1.0,1.0,60.0
+fusi mentah -> Spectral,Iliev,washing_machine,1.0,1.0,1.0,30.0
+fusi mentah -> Spectral,Shubha,keyboard,1.0,0.9,0.9474,60.0
+fusi mentah -> Spectral,Shubha,mobile,1.0,0.95,0.9744,60.0
+fusi mentah -> Spectral,Shubha,mouse,1.0,0.1,0.1818,60.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),battery,0.9307,1.0,0.9641,215.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),keyboard,1.0,0.9432,0.9708,229.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),microwave,0.996,0.9843,0.9901,255.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),mobile,0.9797,1.0,0.9898,145.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),mouse,0.995,0.99,0.9925,200.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),pcb,0.9953,0.9726,0.9838,219.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),player,0.9832,0.9791,0.9811,239.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),printer,0.9928,0.9964,0.9946,275.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),television,0.9583,0.9961,0.9768,254.0
+DINOv3 saja -> Spectral,BDC-train (in-sample),washing_machine,1.0,0.9765,0.9881,298.0
+DINOv3 saja -> Spectral,Kaan,battery,0.9387,0.995,0.966,200.0
+DINOv3 saja -> Spectral,Kaan,keyboard,0.9543,0.9947,0.9741,189.0
+DINOv3 saja -> Spectral,Kaan,microwave,0.9944,0.9672,0.9806,183.0
+DINOv3 saja -> Spectral,Kaan,mobile,0.9941,0.9825,0.9882,171.0
+DINOv3 saja -> Spectral,Kaan,mouse,1.0,0.9322,0.9649,177.0
+DINOv3 saja -> Spectral,Kaan,pcb,1.0,0.9891,0.9945,184.0
+DINOv3 saja -> Spectral,Kaan,player,0.9783,0.989,0.9836,182.0
+DINOv3 saja -> Spectral,Kaan,printer,1.0,1.0,1.0,166.0
+DINOv3 saja -> Spectral,Kaan,television,0.9647,0.982,0.9733,167.0
+DINOv3 saja -> Spectral,Kaan,washing_machine,1.0,0.9771,0.9884,175.0
+DINOv3 saja -> Spectral,Bangladesh,battery,0.8119,0.9425,0.8723,87.0
+DINOv3 saja -> Spectral,Bangladesh,keyboard,1.0,0.962,0.9806,79.0
+DINOv3 saja -> Spectral,Bangladesh,mobile,0.949,0.8942,0.9208,104.0
+DINOv3 saja -> Spectral,Bangladesh,mouse,1.0,1.0,1.0,50.0
+DINOv3 saja -> Spectral,Bangladesh,pcb,1.0,0.9612,0.9802,129.0
+DINOv3 saja -> Spectral,Karan,battery,1.0,0.996,0.998,499.0
+DINOv3 saja -> Spectral,Iliev,battery,0.6977,1.0,0.8219,30.0
+DINOv3 saja -> Spectral,Iliev,keyboard,1.0,0.9667,0.9831,30.0
+DINOv3 saja -> Spectral,Iliev,microwave,1.0,1.0,1.0,30.0
+DINOv3 saja -> Spectral,Iliev,mobile,0.7662,0.9833,0.8613,60.0
+DINOv3 saja -> Spectral,Iliev,mouse,1.0,1.0,1.0,30.0
+DINOv3 saja -> Spectral,Iliev,pcb,1.0,1.0,1.0,30.0
+DINOv3 saja -> Spectral,Iliev,player,1.0,0.0333,0.0645,30.0
+DINOv3 saja -> Spectral,Iliev,printer,1.0,1.0,1.0,15.0
+DINOv3 saja -> Spectral,Iliev,television,0.9833,0.9833,0.9833,60.0
+DINOv3 saja -> Spectral,Iliev,washing_machine,1.0,1.0,1.0,30.0
+DINOv3 saja -> Spectral,Shubha,keyboard,1.0,1.0,1.0,60.0
+DINOv3 saja -> Spectral,Shubha,mobile,1.0,0.8833,0.9381,60.0
+DINOv3 saja -> Spectral,Shubha,mouse,1.0,1.0,1.0,60.0

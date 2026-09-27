@@ -1,0 +1,19 @@
+method,set,n,n_classes,acc,macro_p,macro_r,macro_f1,f1_lo,f1_hi
+v4 (CMRE -> Spectral),BDC-train (in-sample),2329,10,0.9931,0.9928,0.9929,0.9928,0.9891,0.9961
+v4 (CMRE -> Spectral),Kaan,1794,10,0.9939,0.9943,0.9938,0.994,0.99,0.9971
+v4 (CMRE -> Spectral),Bangladesh,449,5,0.9889,0.9891,0.9915,0.9901,0.9807,0.998
+v4 (CMRE -> Spectral),Karan,499,1,1.0,1.0,1.0,1.0,1.0,1.0
+v4 (CMRE -> Spectral),Iliev,345,10,0.9391,0.9662,0.93,0.9275,0.9031,0.9514
+v4 (CMRE -> Spectral),Shubha,180,3,0.9944,1.0,0.9944,0.9972,0.9905,1.0
+fusi mentah -> Spectral,BDC-train (in-sample),2329,10,0.9948,0.9946,0.9953,0.9949,0.9919,0.9975
+fusi mentah -> Spectral,Kaan,1794,10,0.9911,0.9962,0.9912,0.9937,0.9901,0.9965
+fusi mentah -> Spectral,Bangladesh,449,5,0.7906,0.741,0.701,0.7137,0.6887,0.7385
+fusi mentah -> Spectral,Karan,499,1,1.0,1.0,1.0,1.0,1.0,1.0
+fusi mentah -> Spectral,Iliev,345,10,0.9159,0.9677,0.905,0.9197,0.8909,0.9458
+fusi mentah -> Spectral,Shubha,180,3,0.65,1.0,0.65,0.7012,0.6576,0.7437
+DINOv3 saja -> Spectral,BDC-train (in-sample),2329,10,0.9833,0.9831,0.9838,0.9832,0.9778,0.9878
+DINOv3 saja -> Spectral,Kaan,1794,10,0.981,0.9824,0.9809,0.9814,0.9753,0.9875
+DINOv3 saja -> Spectral,Bangladesh,449,5,0.9465,0.9522,0.952,0.9508,0.9312,0.9687
+DINOv3 saja -> Spectral,Karan,499,1,0.996,1.0,0.996,0.998,0.995,1.0
+DINOv3 saja -> Spectral,Iliev,345,10,0.9072,0.9447,0.8967,0.8714,0.8538,0.8903
+DINOv3 saja -> Spectral,Shubha,180,3,0.9611,1.0,0.9611,0.9794,0.9623,0.9928

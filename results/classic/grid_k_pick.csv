@@ -1,0 +1,29 @@
+debias,criterion,K,xsrc,ext_nmi
+A0 mentah,silhouette,24.0,0.2335,0.7409
+A0 mentah,eigengap,23.0,0.2335,0.7509
+A0 mentah,PAC,13.0,0.7094,0.8394
+A0 mentah,PS>=0.8,,,
+A1 ABTT d=D/100,silhouette,24.0,0.5796,0.7526
+A1 ABTT d=D/100,eigengap,22.0,0.572,0.751
+A1 ABTT d=D/100,PAC,24.0,0.5796,0.7526
+A1 ABTT d=D/100,PS>=0.8,,,
+A1 ABTT d=64,silhouette,24.0,0.537,0.7109
+A1 ABTT d=64,eigengap,13.0,0.7628,0.7831
+A1 ABTT d=64,PAC,21.0,0.6518,0.7384
+A1 ABTT d=64,PS>=0.8,,,
+A2 ComBat-proksi,silhouette,14.0,0.9417,0.8407
+A2 ComBat-proksi,eigengap,19.0,0.5273,0.7864
+A2 ComBat-proksi,PAC,13.0,0.9417,0.8407
+A2 ComBat-proksi,PS>=0.8,,,
+A2 ComBat-proksi x3,silhouette,21.0,0.3897,0.7451
+A2 ComBat-proksi x3,eigengap,15.0,0.717,0.8043
+A2 ComBat-proksi x3,PAC,13.0,0.7202,0.8369
+A2 ComBat-proksi x3,PS>=0.8,,,
+A3 INLP x3,silhouette,23.0,0.6576,0.7839
+A3 INLP x3,eigengap,24.0,0.6576,0.7821
+A3 INLP x3,PAC,13.0,0.9807,0.8573
+A3 INLP x3,PS>=0.8,,,
+A4 CMRE (v4),silhouette,17.0,0.9884,0.8612
+A4 CMRE (v4),eigengap,16.0,0.9754,0.8586
+A4 CMRE (v4),PAC,13.0,0.9777,0.8901
+A4 CMRE (v4),PS>=0.8,,,
