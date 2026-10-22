@@ -19,14 +19,6 @@ sumber foto tersebut, beserta semua hasil, gambar, dashboard, dan kode untuk mer
 |---|---|
 | Kode kelompok / registrasi | SD2026040000100 |
 | Cabang lomba | Big Data Challenge (BDC), Satria Data 2026 |
-| Perguruan tinggi | Institut Teknologi Sepuluh Nopember (Program Studi Rekayasa Kecerdasan Artifisial) |
-| Pembimbing | Dini Adni Navastra, S.Kom., M.Sc. (0349763664230223) |
-
-| No | Nama | NRP | Peran |
-|---|---|---|---|
-| 1 | Berliana Sarlita Rahajeng | 5054241023 | Anggota |
-| 2 | Fazle Mawla Wahyuhanda | 5054241020 | Ketua |
-| 3 | Muhammad Fatih Al Fawwaz | 5054241007 | Anggota |
 
 ## Pipeline
 
