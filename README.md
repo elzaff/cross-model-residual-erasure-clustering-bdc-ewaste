@@ -3,7 +3,7 @@
 **Cross-Model Residual Erasure (CMRE) + SCMax + Spectral Clustering + deteksi OOD kNN**
 Karya ilmiah babak semifinal **Big Data Challenge (BDC) Satria Data 2026**.
 
-**Dashboard interaktif:** [https://elzaff.github.io/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard/](https://elzaff.github.io/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard/) · kode halaman: [https://github.com/elzaff/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard](https://github.com/elzaff/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard)
+**Dashboard interaktif:** [https://sentrahub.tech](https://sentrahub.tech) · kode halaman: [https://github.com/elzaff/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard](https://github.com/elzaff/cross-model-residual-erasure-clustering-bdc-ewaste-dashboard)
 
 Foto e-waste datang dari sumber yang sangat beragam: citra produk berlatar putih, foto objek berlatar beragam, sampai foto lapangan di
 pengepul. Kami menemukan bahwa model fondasi visi-bahasa (SigLIP2, PE-Core, CLIP) cenderung mengelompokkan foto menurut
